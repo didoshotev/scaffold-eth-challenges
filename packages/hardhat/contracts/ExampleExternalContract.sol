@@ -2,18 +2,13 @@
 pragma solidity 0.8.4;
 
 contract ExampleExternalContract { 
-
-    uint256 stakedAmount;
+    bool public completed = false; 
 
     function complete() external payable { 
-        stakedAmount += msg.value;
+        completed = true;
     }
 
     function getBalance() public view returns(uint256) { 
         return address(this).balance;
-    }
-
-    function getStakedAmount() public view returns(uint256) { 
-        return stakedAmount;
     }
 }

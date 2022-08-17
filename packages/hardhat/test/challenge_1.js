@@ -70,6 +70,7 @@ describe("🚩 Challenge 1: 🥩 Decentralized Staking App", function () {
       it("If enough is staked and time has passed, you should be able to complete", async function () {
 
         const timeLeft1 = await stakerContract.timeLeft()
+        console.log('TIMELEFT: ', timeLeft1.toNumber());
         console.log('\t',"⏱ There should be some time left: ",timeLeft1.toNumber())
         expect(timeLeft1.toNumber()).to.greaterThan(0);
 
@@ -82,17 +83,17 @@ describe("🚩 Challenge 1: 🥩 Decentralized Staking App", function () {
         await network.provider.send("evm_mine")
 
         const timeLeft2 = await stakerContract.timeLeft()
+        console.log('TIMELEFT 2: ', timeLeft1.toNumber());
         console.log('\t',"⏱ Time should be up now: ",timeLeft2.toNumber())
         expect(timeLeft2.toNumber()).to.equal(0);
 
         console.log('\t'," 🎉 calling execute")
         const execResult = await stakerContract.execute();
-        console.log('\t'," 🏷  execResult: ",execResult.hash)
+        console.log('\t'," 🏷  execResult: ", execResult.hash)
 
         const result = await exampleExternalContract.completed()
         console.log('\t'," 🥁 complete: ",result)
         expect(result).to.equal(true);
-
       })
 
 
@@ -135,7 +136,7 @@ describe("🚩 Challenge 1: 🥩 Decentralized Staking App", function () {
         const startingBalance = await ethers.provider.getBalance(secondAccount.address);
 
         console.log('\t'," 💵 calling withdraw")
-        const withdrawResult = await stakerContract.connect(secondAccount).withdraw();
+        const withdrawResult = await stakerContract.connect(secondAccount).withdraw(secondAccount.address);
         console.log('\t'," 🏷  withdrawResult: ",withdrawResult.hash)
 
         // need to account for the gas cost from calling withdraw
