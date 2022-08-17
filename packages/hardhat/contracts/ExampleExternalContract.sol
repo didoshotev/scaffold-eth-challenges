@@ -1,12 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.4;
 
-contract ExampleExternalContract {
+contract ExampleExternalContract { 
 
-  bool public completed;
+    uint256 stakedAmount;
 
-  function complete() public payable {
-    completed = true;
-  }
+    function complete() external payable { 
+        stakedAmount += msg.value;
+    }
 
+    function getBalance() public view returns(uint256) { 
+        return address(this).balance;
+    }
+
+    function getStakedAmount() public view returns(uint256) { 
+        return stakedAmount;
+    }
 }
