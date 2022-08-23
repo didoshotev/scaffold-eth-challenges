@@ -51,13 +51,13 @@ contract Staker {
 
     // if the `threshold` was not met, allow everyone to call a `withdraw()` function
     // Add a `withdraw(address payable)` function lets users withdraw their balance
-    function withdraw(address payable withdrawer) public notCompleted {
+    function withdraw() public notCompleted {
         require(openForWithdrawal, "Not yet open for withdrawal");
         // do this first to guard against reentrancy (not problem here but good practice)
-        uint256 value = balances[withdrawer];
-        balances[withdrawer] = 0;
+        uint256 value = balances[msg.sender];
+        balances[msg.sender] = 0;
 
-        withdrawer.call{value: value}("");
+        msg.sender.call{value: value}("");
     }
 
     // Add a `timeLeft()` view function that returns the time left before the deadline for the frontend

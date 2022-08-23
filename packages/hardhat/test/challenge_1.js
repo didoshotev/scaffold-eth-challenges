@@ -136,7 +136,7 @@ describe("🚩 Challenge 1: 🥩 Decentralized Staking App", function () {
         const startingBalance = await ethers.provider.getBalance(secondAccount.address);
 
         console.log('\t'," 💵 calling withdraw")
-        const withdrawResult = await stakerContract.connect(secondAccount).withdraw(secondAccount.address);
+        const withdrawResult = await stakerContract.connect(secondAccount).withdraw();
         console.log('\t'," 🏷  withdrawResult: ",withdrawResult.hash)
 
         // need to account for the gas cost from calling withdraw

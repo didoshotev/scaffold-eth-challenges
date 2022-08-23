@@ -40,6 +40,6 @@
     "send": "hardhat send",
     "generate": "hardhat generate",
     "account": "hardhat account",
-    "verify": "hardhat etherscan-verify --api-key 123123"
+    "verify": "hardhat etherscan-verify --api-key API_KEY"
   }
 }
